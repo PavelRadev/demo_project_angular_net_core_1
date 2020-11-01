@@ -1,0 +1,54 @@
+<div class="bg-white relative p-15 mat-elevation-z2">
+
+  <div [class.blur-2]="isLoading">
+    <div layout layout-align="space-between" class="m-l-20">
+      <h2>Registered users</h2>
+    </div>
+
+    <ng-container *ngIf="isLoading || tableData?.totalCount">
+      <div class="table-wrapper">
+        <table mat-table
+               class='width-100-per'
+               [dataSource]="tableData?.list"
+               matSort
+               (matSortChange)="onSort($event)">
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let element">
+              {{element.fullName}}
+
+              <span *ngIf="element.deletedAt"
+                    class="c-warning">
+              (Deactivated)
+            </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="companyName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Company name</th>
+            <td mat-cell *matCellDef="let element"> {{element.companyName}}</td>
+          </ng-container>
+
+          <tr mat-header-row
+              *matHeaderRowDef="['firstName','email','companyName']"></tr>
+          <tr mat-row
+              *matRowDef="let row; columns: ['firstName','email','companyName'];"
+              class="expanded element-row"></tr>
+        </table>
+      </div>
+
+      <mat-paginator [length]="tableData?.totalCount" [pageSize]="filters.pageSize"
+                     [pageSizeOptions]="[5, 10, 25, 100]"
+                     [pageIndex]="filters.page"
+                     (page)="onPaginationChanged($event)"></mat-paginator>
+    </ng-container>
+    <ng-container *ngIf="tableData && !tableData?.totalCount">
+      <h3>No data found</h3>
+    </ng-container>
+  </div>
+</div>

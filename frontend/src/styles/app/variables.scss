@@ -1,0 +1,89 @@
+﻿@import '~@angular/material/theming';
+
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+$default-margins: 0, 10, 15, 20, 25, 30, 40, 46, 50, 60;
+$default-paddings: 0, 10;
+$default-font-sizes: 14, 16, 18, 21;
+
+$default-pixel-sized: 0, 48, 70, 160;
+$default-percentage-sizes: 0, 10, 20, 25, 50, 100;
+$default-line-heights: 0, 16, 21, 24, 28, 32, 42;
+
+
+$theme-c-accent-1: #5e60e5;
+$theme-c-accent-2: #08beb2;
+$theme-c-input-text: #4a4a4a;
+$theme-c-text-main: #000000;
+
+$theme-c-info: #3D539B;
+$theme-c-warning: #FB6E0E;
+$theme-c-alert: #F9D000;
+$theme-c-success: #84BC03;
+$theme-c-error: #CD1B3B;
+$theme-c-disabled-button: #BBDEF7;
+$theme-c-accent-button-hover: #5CB1EB;
+$theme-c-table-head: #939393;
+
+// h1
+$theme-t-h1-font-size: 36px;
+$theme-t-h1-line-height: 36px;
+$theme-t-h1-font-weight: 500;
+
+// h3
+$theme-t-h3-font-size: 20px;
+$theme-t-h3-line-height: 20px;
+$theme-t-h3-font-weight: 500;
+
+// button
+$theme-t-button-font-size: 18px;
+$theme-t-button-line-height: 18px;
+$theme-t-button-font-weight: 500;
+
+// link 1
+$theme-t-link1-font-size: 18px;
+$theme-t-link1-line-height: 18px;
+$theme-t-link1-font-weight: 500;
+
+// input 1
+$theme-t-input1-font-size: 28px;
+$theme-t-input1-line-height: 28px;
+$theme-t-input1-font-weight: 500;
+
+// input 2
+$theme-t-input2-font-size: 13px;
+$theme-t-input2-line-height: 13px;
+$theme-t-input2-font-weight: 500;
+
+$theme-primary-palette: map-merge(
+    $mat-indigo,
+    (
+      500: $theme-c-accent-1
+    )
+);
+
+$theme-accent-palette: map-merge(
+    $mat-cyan,
+    (
+      500: $theme-c-accent-2
+    )
+);
+
+$theme-warning-palette: map-merge(
+    $mat-amber,
+    (
+      900: $theme-c-warning
+    )
+);
+
+$theme-error-palette: map-merge(
+    $mat-red,
+    (
+      600: $theme-c-warning,
+      900: $theme-c-error
+    )
+);
+

@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  demo-project-pgsql-db:
+    image: postgres:12-alpine
+    environment:
+      POSTGRES_DB: demo_project_db
+      POSTGRES_PASSWORD: postgres
+    volumes:
+    - cc-db-data:/var/lib/postgresql/data
+    ports:
+    - 5433:5432
+
+volumes:
+  cc-db-data:

@@ -1,0 +1,199 @@
+<div layout="row">
+  <div flex-xs="100"
+       flex-sm="45"
+       flex-md="45"
+       flex-lg="40"
+       flex-xl="40"
+       class="mat-typography bg-white min-height-100vh"
+       layout
+       layout-align="center start">
+
+    <div flex-xs="90"
+         flex-sm="90"
+         flex-md="80"
+         flex-lg="70"
+         flex-xl="70"
+         layout
+         layout-wrap>
+
+      <div flex="100"
+           class="m-t-60 m-y-xl-80"
+           layout>
+        <div class="width-70 height-70 bc-gray border-radius-50-per"
+             layout
+             layout-align="center center">
+          Logo
+        </div>
+      </div>
+
+      <div flex="100" class="m-t-25 m-b-60">
+        <h1 class="line-height-42">Start your 14 day free trial</h1>
+        <h3 class="line-height-24">No credit card required</h3>
+      </div>
+
+      <form flex="100"
+            class="relative"
+            #registerForm="ngForm">
+        <app-loading-animation *ngIf="isLoading"></app-loading-animation>
+
+        <div layout
+             layout-align="space-between"
+             layout-wrap
+             [class.blur-2]="isLoading">
+          <div flex="100" layout layout-align="space-between">
+            <mat-form-field flex="45"
+                            flex-xs="100"
+                            class="m-b-30">
+              <mat-label>FIRST NAME</mat-label>
+              <input type="text"
+                     matInput
+                     #firstNameInput="ngModel"
+                     name="firstName"
+                     required
+                     [(ngModel)]="model.firstName">
+              <mat-error *ngIf="firstNameInput.errors?.required">
+                First name is required
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field flex="45"
+                            flex-xs="100"
+                            class="m-b-30">
+              <mat-label>LAST NAME</mat-label>
+              <input type="text"
+                     matInput
+                     #lastNameInput="ngModel"
+                     name="lastName"
+                     required
+                     [(ngModel)]="model.lastName">
+              <mat-error *ngIf="lastNameInput.errors?.required">
+                Last name is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+
+          <mat-form-field flex="100"
+                          class="m-b-30">
+            <mat-label>COMPANY NAME</mat-label>
+            <input type="text"
+                   matInput
+                   #companyNameInput="ngModel"
+                   name="companyName"
+                   required
+                   [(ngModel)]="model.companyName">
+            <mat-error *ngIf="companyNameInput.errors?.required">
+              Company name is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field flex="100"
+                          class="m-b-30">
+            <mat-label>EMAIL</mat-label>
+            <input type="text"
+                   matInput
+                   #emailInput="ngModel"
+                   name="email"
+                   required
+                   [(ngModel)]="model.email"
+                   appBaseAsyncValidator
+                   [validationErrorName]="'emailTakenError'"
+                   [validationFunctionToUse]="uniqEmailValidatorFunc"
+                   [pattern]="emailPattern">
+            <mat-icon matSuffix *ngIf="emailInput.pending">
+              <app-loading-animation size="15px" blobSize="5px"></app-loading-animation>
+            </mat-icon>
+
+            <mat-error>{{emailInput.errors?.serverError}}</mat-error>
+            <mat-error *ngIf="emailInput.errors?.required">
+              Email is required
+            </mat-error>
+            <mat-error *ngIf="emailInput.touched && emailInput.errors?.pattern">
+              Email is invalid
+            </mat-error>
+            <mat-error *ngIf="emailInput.errors?.emailTakenError">
+              Email is already in use
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field flex="100"
+                          class="m-b-30">
+            <mat-label>PASSWORD</mat-label>
+            <input [type]="getPasswordInputType()"
+                   matInput
+                   #passwordInput="ngModel"
+                   name="password"
+                   required
+                   [pattern]="passwordPattern"
+                   [(ngModel)]="model.password">
+            <mat-icon matSuffix
+                      (click)="isPasswordVisible = !isPasswordVisible">{{isPasswordVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error>{{passwordInput.errors?.serverError}}</mat-error>
+            <mat-error *ngIf="passwordInput.errors?.required">
+              Password is required
+            </mat-error>
+            <mat-error *ngIf="passwordInput.touched && passwordInput.errors?.pattern">
+              Password should containt at least 8 eight characters, one letter and one number
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field flex="100"
+                          class="m-b-25">
+            <mat-label>CONFIRM PASSWORD</mat-label>
+            <input [type]="getConfirmPasswordInputType()"
+                   matInput
+                   #confirmPasswordInput="ngModel"
+                   name="confirmPassword"
+                   required
+                   [(ngModel)]="model.confirmPassword">
+            <mat-icon matSuffix
+                      (click)="isConfirmPasswordVisible = !isConfirmPasswordVisible">{{isConfirmPasswordVisible ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error>{{confirmPasswordInput.errors?.serverError}}</mat-error>
+            <mat-error *ngIf="confirmPasswordInput.errors?.required">
+              Confirm password is required
+            </mat-error>
+
+            <mat-error *ngIf="model.confirmPassword != model.password">
+              Passwords must be the same
+            </mat-error>
+          </mat-form-field>
+
+          <mat-checkbox flex="100"
+                        name="isTersmChecked"
+                        required
+                        [(ngModel)]="isTersmChecked">
+            I agree to the terms of service.
+          </mat-checkbox>
+
+          <div flex="100"
+               layout
+               layout-align="start center"
+               class="m-t-46 m-b-20">
+            <button mat-raised-button
+                    styled-button
+                    type="submit"
+                    (click)="signup()"
+                    class="m-r-32 width-160"
+                    [disabled]="isLoading || !registerForm.valid || !isTersmChecked || model.confirmPassword != model.password"
+                    color="primary">
+              Sign Up
+            </button>
+
+            <span class="m-l-15 f-s-18 line-height-21 cursor-pointer"
+                  routerLink="/auth/login">
+              Cancel
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div hide-xs
+       flex-md="55"
+       flex-lg="60"
+       flex-xl="60"
+       class="bg-white login-image align-items-center min-height-100vh">
+  </div>
+</div>
+

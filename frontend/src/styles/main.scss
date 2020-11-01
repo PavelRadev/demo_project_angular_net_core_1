@@ -1,0 +1,43 @@
+@import './app/variables';
+@import '~@angular/material/theming';
+@import '~@covalent/core/common/styles/layout';
+@import './app/mat-buttons-styling';
+@import './app/mat-input-styling';
+@import './app/helpers';
+@import './app/loading-animation';
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+$typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level($theme-t-h1-font-size, $theme-t-h1-line-height, $theme-t-h1-font-weight),
+  $subheading-2: mat-typography-level($theme-t-h3-font-size, $theme-t-h3-line-height, $theme-t-h3-font-weight),
+  $button: mat-typography-level($theme-t-button-font-size, $theme-t-button-line-height, $theme-t-button-font-weight),
+);
+
+@include mat-core($typography);
+
+$demo-frontend-primary: mat-palette($theme-primary-palette, 500, 200, 700);
+$demo-frontend-accent: mat-palette($theme-accent-palette, 500, 200, 700);
+$demo-frontend-warn: mat-palette($theme-error-palette, 900, 500, 900);
+
+$demo-frontend-theme: mat-light-theme($demo-frontend-primary, $demo-frontend-accent, $demo-frontend-warn);
+
+@include angular-material-theme($demo-frontend-theme);
+@include theme-material-buttons($demo-frontend-theme);
+@include theme-material-inputs($demo-frontend-theme);
+
+@include covalent-layout();
+
+.login-image {
+  width: 100%;
+  background-size: cover;
+  background-image: url(../assets/images/login-background.jpg);
+}

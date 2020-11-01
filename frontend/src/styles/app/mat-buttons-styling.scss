@@ -1,0 +1,21 @@
+﻿@mixin theme-material-buttons($theme) {
+  .active {
+    .mat-button-wrapper {
+      border-bottom-color: white;
+      border-bottom-width: 2px;
+      border-bottom-style: double;
+    }
+  }
+
+  [styled-button] {
+    &.mat-button,
+    &.mat-icon-button,
+    &.mat-stroked-button,
+    &.mat-flat-button,
+    &.mat-raised-button {
+      border-radius: 100px !important;
+      padding: 15px;
+      line-height: 21px;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+<div class="loading-shade" [ngStyle]="{'height': shadeHeight}">
+  <div class="loading-spinner" [ngStyle]="{'height': size, 'width': size}">
+    <div class="blob top" [ngStyle]="{'height': blobSize, 'width': blobSize}"></div>
+    <div class="blob bottom" [ngStyle]="{'height': blobSize, 'width': blobSize}"></div>
+    <div class="blob left" [ngStyle]="{'height': blobSize, 'width': blobSize}"></div>
+
+    <div class="blob move-blob" [ngStyle]="{'height': blobSize, 'width': blobSize, 'background': blobColor}"></div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@import './variables';
+
+@mixin theme-material-inputs($theme) {
+  .mat-form-field {
+    .mat-form-field-infix {
+      padding: 3px 0 10px;
+    }
+
+    .mat-input-element {
+      font-size: 28px;
+      letter-spacing: 0.13px;
+      line-height: 24px;
+      height: 34px;
+      color: #4a4a4a;
+    }
+
+    .mat-form-field-label {
+      font-size: 18px;
+      letter-spacing: 1px;
+    }
+
+    .mat-form-field-should-float {
+      .mat-form-field-label {
+        font-size: 13px;
+        letter-spacing: 0.72px;
+      }
+    }
+
+
+    .mat-form-field-underline {
+      background-color: #d8d8d8;
+    }
+  }
+
+  mat-checkbox {
+    .mat-checkbox-label {
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+  }
+}
